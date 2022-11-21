@@ -7,7 +7,9 @@ const DashboardLayout = () => {
   return (
     <div className={classes['c-dashboard-layout']}>
       <SideBar />
-      <div className={classes['c-dashboard-layout__content-container']}>{<Outlet />}</div>
+      <div className={classes['c-dashboard-layout__content-container']}>
+        <Outlet />
+      </div>
     </div>
   );
 };

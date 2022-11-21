@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import classes from 'App.module.scss';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Login from 'pages/Login/Login';
 import Navbar from 'components/Navbar/Navbar';
 import Profile from 'pages/Profile/Profile';
