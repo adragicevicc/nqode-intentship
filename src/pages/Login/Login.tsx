@@ -24,7 +24,14 @@ const Login = () => {
 
   const handleToken = (token: string) => {
     localStorage.setItem('token', token);
-    setRole(getRole());
+    const role = getRole();
+    setRole(role);
+
+    if (role === 'USER') {
+      navigate('/');
+      return;
+    }
+    navigate('/dashboard/rentalsoverview');
   };
 
   const handleLogin = async () => {
@@ -35,7 +42,6 @@ const Login = () => {
       })
       .then((response) => {
         handleToken(response.data.accessToken);
-        navigate('/booksoverview');
       });
   };
 

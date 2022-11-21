@@ -13,7 +13,7 @@ const UsersListItem = ({
   return (
     <div className={classes['c-users-list-item']}>
       <div className={classes['c-users-list-item__info-container']}>
-        <Link to={`/profile/${id}`}>{email}</Link>
+        <Link to={`/dashboard/profile/${id}`}>{email}</Link>
         <span>{firstName}</span>
         <span>{lastName}</span>
         <span>{address}</span>
