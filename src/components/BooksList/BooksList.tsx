@@ -36,7 +36,6 @@ const BooksList = () => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(event.target.value);
-    console.log(searchInput);
   };
 
   useEffect(() => {
