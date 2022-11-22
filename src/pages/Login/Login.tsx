@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import InputContainer from 'components/core/InputContainer/InputContainer';
 import { RoleContext } from 'contexts/roleContext';
 import { getRole } from 'services/tokenService';
+import { roleTypes } from 'utils/roleTypes';
 
 interface CredentialsForm {
   username: string;
@@ -27,7 +28,7 @@ const Login = () => {
     const role = getRole();
     setRole(role);
 
-    if (role === 'USER') {
+    if (role === roleTypes.userRole) {
       navigate('/');
       return;
     }
@@ -52,8 +53,15 @@ const Login = () => {
   return (
     <div className={classes['c-login']}>
       <div className={classes['c-login__container']}>
-        <InputContainer name="username" onChange={handleChange} label="Username" />
-        <InputContainer name="password" onChange={handleChange} label="Password" type="password" />
+        <div className={classes['c-login__input-container']}>
+          <InputContainer name="username" onChange={handleChange} label="Username" />
+          <InputContainer
+            name="password"
+            onChange={handleChange}
+            label="Password"
+            type="password"
+          />
+        </div>
         <div className={classes['c-login__button-container']}>
           <Button content="Log in" onClick={handleLogin} />
         </div>

@@ -3,6 +3,7 @@ import classes from './BookListItem.module.scss';
 import image from 'img/book1.png';
 import { Link } from 'react-router-dom';
 import { RoleContext } from 'contexts/roleContext';
+import { roleTypes } from 'utils/roleTypes';
 
 interface BookProps {
   item: {
@@ -14,7 +15,7 @@ interface BookProps {
 
 const BookListItem = ({ item: { id, title, author } }: BookProps) => {
   const { role } = useContext(RoleContext);
-  const path = role === 'ADMINISTRATOR' ? `/dashboard/book/${id}` : `/book/${id}`;
+  const path = role === roleTypes.adminRole ? `/dashboard/book/${id}` : `/book/${id}`;
 
   return (
     <div className={classes['c-book-list-item']}>

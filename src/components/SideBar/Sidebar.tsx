@@ -23,14 +23,14 @@ const SideBar = () => {
   return (
     <div className={classes['c-side-bar']}>
       <div className={classes['c-side-bar__options']}>
-        {sideBarLinks.map((el) => (
+        {sideBarLinks.map(({ name, link }) => (
           <Link
             className={`${classes['c-side-bar__options-item']} ${
-              classes[`${pathname === el.link ? 'c-side-bar__options-item-active' : ''}`]
+              classes[`${pathname === link ? 'c-side-bar__options-item-active' : ''}`]
             }`}
-            to={el.link}
+            to={link}
           >
-            {el.name}
+            {name}
           </Link>
         ))}
 
