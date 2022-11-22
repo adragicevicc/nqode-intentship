@@ -4,6 +4,7 @@ import RentalModel from 'models/RentalModel';
 import { updateExtendRental, updateCloseRental } from 'services/rentalsService';
 import { isRoleAdmin } from 'services/tokenService';
 import classes from './RentalsOverviewItem.module.scss';
+import Input from 'components/core/Input/Input';
 
 interface RentalsOverviewItemProps {
   item: RentalModel;
@@ -41,12 +42,7 @@ const RentalsOverviewItem = ({
         {isRoleAdmin() && (
           <>
             <span>{userEmail}</span>
-            <input
-              className={classes['c-rentals-overview-item__input']}
-              name="rentPeriod"
-              onChange={handleRentPeriod}
-              type="number"
-            ></input>
+            <Input name="rentPeriod" onChange={handleRentPeriod} type="number" />
             <Button content={'Extend rent'} onClick={extendRent} disabled={!additionalRentPeriod} />
             <Button content={'Close rent'} onClick={closeRent} />
           </>

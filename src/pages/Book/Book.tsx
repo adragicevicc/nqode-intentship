@@ -34,7 +34,7 @@ const Book = () => {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       })
-      .then(() => navigate('/booksoverview'));
+      .then(() => navigate('dashboard/booksoverview'));
   };
 
   const handleRentPeriod = (event: React.ChangeEvent<HTMLInputElement>) => {

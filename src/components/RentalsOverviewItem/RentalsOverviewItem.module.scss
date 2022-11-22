@@ -18,12 +18,6 @@
     }
   }
 
-  &__input {
-    &:focus {
-      outline: none;
-    }
-  }
-
   &__bottom-line {
     height: 1px;
     background-color: $color-black;
