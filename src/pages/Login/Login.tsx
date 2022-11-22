@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import InputContainer from 'components/core/InputContainer/InputContainer';
 import { RoleContext } from 'contexts/roleContext';
 import { getRole } from 'services/tokenService';
-import { roleTypes } from 'utils/roleTypes';
+import { isRoleUser } from 'services/tokenService';
 
 interface CredentialsForm {
   username: string;
@@ -28,7 +28,7 @@ const Login = () => {
     const role = getRole();
     setRole(role);
 
-    if (role === roleTypes.userRole) {
+    if (isRoleUser()) {
       navigate('/');
       return;
     }

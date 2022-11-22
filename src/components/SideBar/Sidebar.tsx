@@ -21,12 +21,12 @@ const SideBar = () => {
   };
 
   return (
-    <div className={classes['c-side-bar']}>
-      <div className={classes['c-side-bar__options']}>
+    <div className={classes['c-sidebar']}>
+      <div className={classes['c-sidebar__options']}>
         {sideBarLinks.map(({ name, link }) => (
           <Link
-            className={`${classes['c-side-bar__options-item']} ${
-              classes[`${pathname === link ? 'c-side-bar__options-item-active' : ''}`]
+            className={`${classes['c-sidebar__options-item']} ${
+              classes[`${pathname === link ? 'c-sidebar__options-item--active' : ''}`]
             }`}
             to={link}
           >
@@ -34,8 +34,8 @@ const SideBar = () => {
           </Link>
         ))}
 
-        <div className={classes['c-side-bar__bottom-line']} />
-        <span className={classes['c-side-bar__options-item']} onClick={handleLogout}>
+        <div className={classes['c-sidebar__bottom-line']} />
+        <span className={classes['c-sidebar__options-item']} onClick={handleLogout}>
           Logout
         </span>
       </div>
