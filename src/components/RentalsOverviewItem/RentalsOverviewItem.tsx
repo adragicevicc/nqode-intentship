@@ -8,10 +8,12 @@ import Input from 'components/core/Input/Input';
 
 interface RentalsOverviewItemProps {
   item: RentalModel;
+  componentType: 'current' | 'history';
 }
 
 const RentalsOverviewItem = ({
-  item: { id, title, startRentDate, endRentDate, userEmail }
+  item: { id, title, startRentDate, endRentDate, userEmail },
+  componentType
 }: RentalsOverviewItemProps) => {
   const [additionalRentPeriod, setAdditionalRentPeriod] = useState<number>(0);
 

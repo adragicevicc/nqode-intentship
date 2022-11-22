@@ -1,23 +1,34 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import Button from 'components/core/Button/Button';
 import InputContainer from 'components/core/InputContainer/InputContainer';
 import BookModel from 'models/BookModel';
 import classes from './BookDialog.module.scss';
+import { createBook, updateBook } from 'services/booksService';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const BookDialog = (oldBook: BookModel) => {
+interface BookDialogProps {
+  oldBook: BookModel;
+  componentType: 'new' | 'modify';
+}
+
+const BookDialog = ({ oldBook, componentType }: BookDialogProps) => {
   const [book, setBook] = useState<BookModel>(oldBook);
+
+  const navigate = useNavigate();
+  const { id } = useParams();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBook((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   };
 
-  const updateBook = async () => {
-    await axios.put(`${process.env.REACT_APP_BASE_URL}/book/${book.id}`, book, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
-    });
+  const handleCreate = () => {
+    createBook(book);
+  };
+
+  const handleUpdate = async () => {
+    const data = await updateBook(Number(id), book);
+    setBook(data);
+    navigate('/booksoverview');
   };
 
   return (
@@ -33,7 +44,10 @@ const BookDialog = (oldBook: BookModel) => {
         />
       </div>
       <div className={classes['c-book-dialog__button-container']}>
-        <Button content={'Submit'} onClick={updateBook} />
+        <Button
+          content={'Submit'}
+          onClick={componentType === 'new' ? handleCreate : handleUpdate}
+        />
       </div>
     </div>
   );

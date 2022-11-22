@@ -4,9 +4,29 @@
   padding: $space-l $space-xl;
   margin: $space-l;
 
-  width: 90%;
-  background-color: $color-lightgray;
-  border-radius: $space-s;
+  display: flex;
+  flex-direction: column;
+
+  &__dialog-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__button-container {
+    margin-bottom: $space-s;
+
+    display: flex;
+    justify-content: end;
+  }
+
+  &__container {
+    padding: $space-l $space-xl;
+
+    background-color: $color-lightgray;
+    border-radius: $space-s;
+  }
 
   &__headers {
     margin-bottom: $space;
@@ -20,7 +40,7 @@
     padding: $space-xs 0;
   }
 
-  &__list-container {
+  &__items {
     display: flex;
     flex-direction: column;
     gap: $space;

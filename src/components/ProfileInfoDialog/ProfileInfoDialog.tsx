@@ -2,17 +2,26 @@ import React, { useState } from 'react';
 import Button from 'components/core/Button/Button';
 import InputContainer from 'components/core/InputContainer/InputContainer';
 import UserModel from 'models/UserModel';
-import { updateUser } from 'services/userService';
+import { createUser, updateUser } from 'services/userService';
 import classes from './ProfileInfoDialog.module.scss';
 
-const ProfileInfoDialog = (oldUser: UserModel) => {
+interface ProfileInfoDialogProps {
+  oldUser: UserModel;
+  componentType: 'new' | 'modify';
+}
+
+const ProfileInfoDialog = ({ oldUser, componentType }: ProfileInfoDialogProps) => {
   const [user, setUser] = useState<UserModel>(oldUser);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   };
 
-  const modifyUser = async () => {
+  const handleCreate = () => {
+    createUser(user);
+  };
+
+  const handleUpdate = async () => {
     const data = await updateUser(oldUser.id, user);
     setUser(data);
   };
@@ -47,7 +56,10 @@ const ProfileInfoDialog = (oldUser: UserModel) => {
         />
       </div>
       <div className={classes['c-profile-info-dialog__button-container']}>
-        <Button content={'Submit'} onClick={modifyUser} />
+        <Button
+          content={'Submit'}
+          onClick={componentType === 'new' ? handleCreate : handleUpdate}
+        />
       </div>
     </div>
   );

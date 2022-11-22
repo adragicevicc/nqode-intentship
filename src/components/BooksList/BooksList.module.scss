@@ -4,7 +4,27 @@
   padding: $space-xs $space-s;
   margin: $space-l;
 
-  &__items {
+  display: flex;
+  flex-direction: column;
+
+  &__dialog-container {
+    padding: $space-xs $space-s;
+    margin-bottom: $space-s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__button-container {
+    margin-bottom: $space-s;
+
+    display: flex;
+    justify-content: end;
+  }
+
+  &__items-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
