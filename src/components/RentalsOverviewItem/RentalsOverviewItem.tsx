@@ -1,6 +1,6 @@
+import React, { useState } from 'react';
 import Button from 'components/core/Button/Button';
 import RentalModel from 'models/RentalModel';
-import React, { useState } from 'react';
 import { updateExtendRental, updateCloseRental } from 'services/rentalsService';
 import { isRoleAdmin } from 'services/tokenService';
 import classes from './RentalsOverviewItem.module.scss';

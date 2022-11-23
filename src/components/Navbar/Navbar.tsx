@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { RoleContext } from 'contexts/roleContext';
 import { Link } from 'react-router-dom';
-import { isRoleAdmin, isRoleUser, getUserId } from 'services/tokenService';
+import { getUserId } from 'services/tokenService';
 import classes from './Navbar.module.scss';
 
 const Navbar = () => {
@@ -13,34 +13,18 @@ const Navbar = () => {
     setRole('');
   };
 
-  const renderAdminLinks = () => {
-    return (
-      <>
-        <Link to="/dashboard" className={classes['c-navbar__link']}>
-          Overview
-        </Link>
-        <Link to="/users" className={classes['c-navbar__link']}>
-          Users
-        </Link>
-      </>
-    );
-  };
-
   return (
     <div className={classes['c-navbar']}>
       <div>
-        <Link to={`/booksoverview`} className={classes['c-navbar__link']}>
+        <Link to={`/`} className={classes['c-navbar__link']}>
           Books
         </Link>
-        {isRoleUser() && (
-          <Link to={`profile/${id}`} className={classes['c-navbar__link']}>
-            Profile
-          </Link>
-        )}
-        {isRoleAdmin() && renderAdminLinks()}
+        <Link to={`profile/${id}`} className={classes['c-navbar__link']}>
+          Profile
+        </Link>
       </div>
       <div>
-        <Link to="/" className={classes['c-navbar__link']} onClick={handleLogout}>
+        <Link to="/login" className={classes['c-navbar__link']} onClick={handleLogout}>
           Logout
         </Link>
       </div>

@@ -27,7 +27,7 @@ const UsersList = () => {
       </div>
       <div className={classes['c-users-list__list-container']}>
         {users.map((item) => {
-          return <UsersListItem item={item} />;
+          return <UsersListItem item={item} key={item.id} />;
         })}
       </div>
     </div>
