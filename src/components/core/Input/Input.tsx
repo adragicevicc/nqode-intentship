@@ -10,9 +10,9 @@ interface InputProps {
 
 const Input = ({ onChange, value, type, name }: InputProps) => {
   return (
-    <div>
+    <div className={classes['c-input']}>
       <input
-        className={classes['c-input']}
+        className={classes['c-input__container']}
         onChange={onChange}
         value={value}
         type={type}

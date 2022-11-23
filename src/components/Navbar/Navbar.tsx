@@ -1,25 +1,22 @@
-import React, { useContext } from 'react';
-import { RoleContext } from 'contexts/roleContext';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { getUserId } from 'services/tokenService';
 import classes from './Navbar.module.scss';
 
 const Navbar = () => {
   const id = getUserId();
-  const { setRole } = useContext(RoleContext);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    setRole('');
   };
 
   return (
     <div className={classes['c-navbar']}>
       <div>
-        <Link to={`/`} className={classes['c-navbar__link']}>
+        <Link to="/user/booksoverview" className={classes['c-navbar__link']}>
           Books
         </Link>
-        <Link to={`profile/${id}`} className={classes['c-navbar__link']}>
+        <Link to={`/user/profile/${id}`} className={classes['c-navbar__link']}>
           Profile
         </Link>
       </div>

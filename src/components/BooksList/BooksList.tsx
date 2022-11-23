@@ -3,6 +3,8 @@ import BookListItem from 'components/BookListItem/BookListItem';
 import classes from './BooksList.module.scss';
 import axios from 'axios';
 import BookModel from 'models/BookModel';
+import InputContainer from 'components/core/InputContainer/InputContainer';
+import Button from 'components/core/Button/Button';
 
 interface Pagable {
   current?: boolean;
@@ -13,6 +15,8 @@ interface Pagable {
 
 const BooksList = () => {
   const [books, setBooks] = useState<BookModel[]>([]);
+  const [searchInput, setSearchInput] = useState('');
+  const [searchedBooks, setSearchedBooks] = useState<BookModel[]>([]);
 
   const retriveBooks = async () => {
     let url = `${process.env.REACT_APP_BASE_URL}/book`;
@@ -30,6 +34,17 @@ const BooksList = () => {
     });
 
     setBooks(response.data.content);
+    setSearchedBooks(response.data.content);
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleSearch = () => {
+    setSearchedBooks(
+      books.filter((item) => item.title.toLowerCase().includes(searchInput.toLowerCase()))
+    );
   };
 
   useEffect(() => {
@@ -38,9 +53,18 @@ const BooksList = () => {
 
   return (
     <div className={classes['c-books-list']}>
-      {books.map((item) => (
-        <BookListItem item={item} key={item.id} />
-      ))}
+      <div className={classes['c-books-list__search-container']}>
+        <InputContainer onChange={handleChange} label={'Search books'} />
+        <div className={classes['c-books-list__button-container']}>
+          <Button content={'Search'} onClick={handleSearch} />
+        </div>
+      </div>
+
+      <div className={classes['c-books-list__items']}>
+        {searchedBooks.map((item) => (
+          <BookListItem item={item} key={item.id} />
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,7 +1,15 @@
 @import 'variables.scss';
 
 .c-input {
-  padding: $space-xs $space-s;
-  background-color: $color-lightgreen;
-  border: none;
+  display: flex;
+  justify-content: center;
+
+  &__container {
+    padding: $space-xs $space-s;
+
+    border: 1px solid $color-green;
+    border-radius: $space-s;
+
+    height: 1.5rem;
+  }
 }
