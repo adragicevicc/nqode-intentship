@@ -21,7 +21,7 @@ const ProfileInfo = () => {
 
   const handleDelete = async () => {
     await deleteUser(Number(id));
-    navigate('/dashboard');
+    navigate('/dashboard/users');
   };
 
   useEffect(() => {

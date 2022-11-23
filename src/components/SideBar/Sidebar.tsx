@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { RoleContext } from 'contexts/roleContext';
 import classes from './SideBar.module.scss';
 
 const sideBarLinks = [
@@ -10,13 +9,11 @@ const sideBarLinks = [
 ];
 
 const SideBar = () => {
-  const { setRole } = useContext(RoleContext);
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    setRole('');
     navigate('/login');
   };
 
