@@ -22,7 +22,13 @@ export const getRentalsByUser = async (id: number, params: RentalsParams) => {
 };
 
 export const createRental = async (id: number, rentPeriod: number) => {
-  return await axios.post(`/rent/book/${id}/user`);
+  return await axios.post(
+    `/rent/book/${id}/user`,
+    {},
+    {
+      params: { rentPeriod: rentPeriod }
+    }
+  );
 };
 
 export const updateExtendRental = async (id: number, additionalRentPeriod: number) => {

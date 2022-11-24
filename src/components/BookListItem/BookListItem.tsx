@@ -13,7 +13,7 @@ interface BookProps {
 }
 
 const BookListItem = ({ item: { id, title, author } }: BookProps) => {
-  const path = isRoleAdmin() ? `/dashboard/book/${id}` : `/book/${id}`;
+  const path = isRoleAdmin() ? `/dashboard/book/${id}` : `/user/book/${id}`;
 
   return (
     <div className={classes['c-book-list-item']}>

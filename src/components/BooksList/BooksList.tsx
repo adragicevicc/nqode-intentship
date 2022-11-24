@@ -90,7 +90,7 @@ const BooksList = () => {
           <Button content={'Search'} onClick={handleSearch} />
         </div>
       </div>
-      <div className={classes['c-books-list__items']}>
+      <div className={classes['c-books-list__items-container']}>
         {searchedBooks.map((item) => (
           <BookListItem item={item} key={item.id} />
         ))}

@@ -9,6 +9,7 @@ import { isRoleAdmin } from 'services/tokenService';
 import { createRental } from 'services/rentalsService';
 import InputContainer from 'components/core/InputContainer/InputContainer';
 import { getBookById, deleteBook } from 'services/booksService';
+import { createBookCopy } from 'services/bookCopyService';
 
 const Book = () => {
   const [book, setBook] = useState<BookModel>({} as BookModel);
@@ -17,6 +18,12 @@ const Book = () => {
 
   const { id } = useParams();
   const navigate = useNavigate();
+
+  const bookCopy = {
+    id: 0,
+    identifier: crypto.randomUUID(),
+    bookId: book.id
+  };
 
   const retriveBook = async () => {
     const data = await getBookById(Number(id));
@@ -34,6 +41,10 @@ const Book = () => {
 
   const rentBook = async () => {
     await createRental(Number(id), rentPeriod);
+  };
+
+  const addBookCopy = () => {
+    createBookCopy(bookCopy).then(retriveBook);
   };
 
   useEffect(() => {
@@ -67,6 +78,7 @@ const Book = () => {
               <>
                 <Button content="Edit" onClick={() => setModify(true)} />
                 <Button content="Delete" onClick={handleDelete} />
+                <Button content="Add book copy" onClick={addBookCopy} />
               </>
             ) : (
               <div>
