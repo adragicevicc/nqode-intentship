@@ -20,13 +20,13 @@ const SideBar = () => {
   return (
     <div className={classes['c-sidebar']}>
       <div className={classes['c-sidebar__options']}>
-        {sideBarLinks.map(({ name, link }) => (
+        {sideBarLinks.map(({ name, link }, index) => (
           <Link
             className={`${classes['c-sidebar__options-item']} ${
               classes[`${pathname === link ? 'c-sidebar__options-item--active' : ''}`]
             }`}
             to={link}
-            key={name}
+            key={index}
           >
             {name}
           </Link>
