@@ -17,12 +17,12 @@
     align-items: center;
     padding: $space-xs 0;
 
-    &-admin {
+    &-admin-options {
       grid-template-columns: repeat(7, 1fr);
     }
 
-    &-user {
-      grid-template-columns: repeat(3, 1fr);
+    &-simple-view {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 

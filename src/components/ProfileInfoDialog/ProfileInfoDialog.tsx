@@ -44,6 +44,7 @@ const ProfileInfoDialog = ({ oldUser, componentType, handleSubmit }: ProfileInfo
           name="phoneNumber"
           value={user.phoneNumber}
           label="Phone Number"
+          type="number"
         />
       </div>
       <div className={classes['c-profile-info-dialog__button-container']}>

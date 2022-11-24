@@ -26,6 +26,7 @@ const SideBar = () => {
               classes[`${pathname === link ? 'c-sidebar__options-item--active' : ''}`]
             }`}
             to={link}
+            key={name}
           >
             {name}
           </Link>

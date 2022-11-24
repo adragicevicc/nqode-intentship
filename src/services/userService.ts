@@ -1,5 +1,6 @@
 import axios from 'customAxios/customAxios';
 import UserModel from 'models/UserModel';
+import { error, success } from './toastService';
 
 export const getUserById = async (id: number) => {
   const response = await axios.get(`/user/${id}`);
@@ -24,5 +25,8 @@ export const updateUser = async (id: number, user: UserModel) => {
 };
 
 export const deleteUser = async (id: number) => {
-  await axios.delete(`/user/${id}`);
+  await axios
+    .delete(`${process.env.REACT_APP_BASE_URL}/user/${id}`)
+    .then(() => success('User successfully deleted!'))
+    .catch(() => error('User has rented books and can not be deleted!'));
 };

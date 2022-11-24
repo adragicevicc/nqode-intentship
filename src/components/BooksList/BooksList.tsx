@@ -39,9 +39,11 @@ const BooksList = () => {
   };
 
   const handleSearch = () => {
-    setSearchedBooks(
-      books.filter((item) => item.title.toLowerCase().includes(searchInput.toLowerCase()))
-    );
+    if (searchInput.length >= 3 || searchInput.length === 0) {
+      setSearchedBooks(
+        books.filter((item) => item.title.toLowerCase().includes(searchInput.toLowerCase()))
+      );
+    }
   };
 
   const handleCreate = (id: number, book: BookModel) => {

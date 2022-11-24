@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import RentalOverviewItem from 'components/RentalsOverviewItem/RentalsOverviewItem';
 import RentalModel from 'models/RentalModel';
 import classes from './RentalsOverview.module.scss';
-import { getRentals, getRentalsByUser } from 'services/rentalsService';
+import { getRentals, getRentalsByUser, updateCloseRental } from 'services/rentalsService';
 import { isRoleAdmin } from 'services/tokenService';
 import { useLocation, useParams } from 'react-router-dom';
 
@@ -13,14 +13,14 @@ interface RentalsOverviewProps {
 const RentalsOverview = ({ componentType }: RentalsOverviewProps) => {
   const [rentals, setRentals] = useState<RentalModel[]>([]);
 
-  const userId = useParams();
+  const userId = useParams().id;
   const location = useLocation();
   const pathLocation = location.pathname;
 
   const params = {
     current: true,
     page: 0,
-    size: 5,
+    size: 10,
     sort: 'asc'
   };
 
@@ -30,10 +30,14 @@ const RentalsOverview = ({ componentType }: RentalsOverviewProps) => {
     }
 
     const data =
-      isRoleAdmin() && pathLocation === 'profile'
+      pathLocation === `/dashboard/profile/${userId}`
         ? await getRentalsByUser(Number(userId), params)
         : await getRentals(params);
     setRentals(data);
+  };
+
+  const closeRent = (id: number) => {
+    updateCloseRental(id).then(retriveRentals);
   };
 
   useEffect(() => {
@@ -44,24 +48,24 @@ const RentalsOverview = ({ componentType }: RentalsOverviewProps) => {
     <div className={classes['c-rentals-overview']}>
       <div
         className={`${classes['c-rentals-overview__headers']} ${
-          isRoleAdmin()
-            ? classes['c-rentals-overview__headers-admin']
-            : classes['c-rentals-overview__headers-user']
+          isRoleAdmin() && componentType === 'current'
+            ? classes['c-rentals-overview__headers-admin-options']
+            : classes['c-rentals-overview__headers-simple-view']
         }`}
       >
         <span>Book</span>
         <span>Start date</span>
         <span>End date</span>
-        {isRoleAdmin() && (
-          <>
-            <span>User email</span>
-            {componentType === 'current' && <span>Extend rent period for (days):</span>}
-          </>
-        )}
+        <span>User email</span>
       </div>
       <div className={classes['c-rentals-overview__list-container']}>
         {rentals.map((item) => (
-          <RentalOverviewItem item={item} key={item.id} componentType={componentType} />
+          <RentalOverviewItem
+            item={item}
+            key={item.id}
+            closeRent={closeRent}
+            componentType={componentType}
+          />
         ))}
       </div>
     </div>
