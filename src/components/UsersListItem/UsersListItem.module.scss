@@ -1,0 +1,18 @@
+@import 'variables.scss';
+
+.c-users-list-item {
+  width: 100%;
+
+  &__info-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+    align-items: center;
+    padding: $space-xs 0;
+  }
+
+  &__bottom-line {
+    height: 1px;
+    background-color: $color-black;
+  }
+}

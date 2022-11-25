@@ -1,0 +1,39 @@
+@import 'variables.scss';
+
+.c-profile-info {
+  padding: $space-l $space-xl;
+  margin: $space-l;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 20%;
+  min-width: fit-content;
+
+  border: 1px solid $color-green;
+  border-radius: $space-s;
+
+  &__info-container {
+    padding: $space-xs $space-s;
+    margin: $space-xs;
+
+    display: flex;
+    flex-direction: column;
+
+    &--heading {
+      font-weight: bolder;
+      font-size: $fs-large;
+    }
+
+    &--regular {
+      font-size: $fs-medium;
+    }
+  }
+
+  &__modify-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

@@ -1,0 +1,19 @@
+@import 'variables.scss';
+
+.c-navbar {
+  padding: $space-s $space;
+
+  min-height: 2rem;
+  background: $color-green;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  &__link {
+    margin: $space-s;
+    color: $color-black;
+    text-decoration: none;
+  }
+}

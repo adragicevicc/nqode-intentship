@@ -1,0 +1,76 @@
+@import 'variables.scss';
+
+.c-book {
+  padding: $space-xs $space-s;
+  margin: $space-s;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  &__image {
+    width: $img-size-l;
+    height: $img-size-l;
+  }
+
+  &__side-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__info-container {
+    padding: $space-xs $space-s;
+    margin: $space-xs;
+
+    display: flex;
+    flex-direction: column;
+    float: left;
+  }
+
+  &__title {
+    padding: $space-xs $space-s;
+    margin: $space-xs;
+
+    font-size: $fs-xlarge;
+  }
+
+  &__author {
+    padding: $space-xs $space-s;
+    margin: $space-xs;
+
+    font-size: $fs-large;
+  }
+
+  &__description {
+    padding: $space-xs $space-s;
+    margin: $space-xs;
+    font-size: $fs-medium;
+    max-width: 70%;
+  }
+
+  &__tools {
+    padding: $space-xs $space-s;
+    margin: $space-xs;
+  }
+
+  &__num-of-copies {
+    padding: $space-xs $space-s;
+    margin: $space-xs;
+  }
+
+  &__modify-container {
+    padding: $space-xs $space-s;
+    margin: $space-xs;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border-style: solid;
+    border-color: $color-green;
+    border-radius: $space-s;
+  }
+}

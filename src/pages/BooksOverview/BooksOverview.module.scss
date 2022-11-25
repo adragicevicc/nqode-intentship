@@ -1,0 +1,10 @@
+@import 'variables.scss';
+
+.c-books-overview {
+  padding: $space-l $space-xl;
+  margin: $space-l;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

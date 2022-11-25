@@ -1,0 +1,40 @@
+@import 'variables.scss';
+
+.c-books-list {
+  padding: $space-xs $space-s;
+  margin: $space-l;
+
+  display: flex;
+  flex-direction: column;
+
+  &__dialog-container {
+    padding: $space-xs $space-s;
+    margin-bottom: $space-s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__button-container {
+    display: flex;
+    justify-content: end;
+  }
+
+  &__items-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &__search-container {
+    padding: $space-xs $space-s;
+    margin: $space-l;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+  }
+}

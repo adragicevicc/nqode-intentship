@@ -1,0 +1,25 @@
+@import 'variables.scss';
+
+.c-rentals-overview-item {
+  width: 100%;
+
+  &__info-container {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    padding: $space-xs 0;
+
+    &-admin-options {
+      grid-template-columns: repeat(7, 1fr);
+    }
+
+    &-standard {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &__bottom-line {
+    height: 1px;
+    background-color: $color-black;
+  }
+}

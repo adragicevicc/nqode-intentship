@@ -1,0 +1,48 @@
+@import 'variables.scss';
+
+.c-users-list {
+  padding: $space-l $space-xl;
+  margin: $space-l;
+
+  display: flex;
+  flex-direction: column;
+
+  &__dialog-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__button-container {
+    margin-bottom: $space-s;
+
+    display: flex;
+    justify-content: end;
+  }
+
+  &__container {
+    padding: $space-l $space-xl;
+
+    background-color: $color-lightgray;
+    border-radius: $space-s;
+  }
+
+  &__headers {
+    margin-bottom: $space;
+    font-weight: bold;
+
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+    align-items: center;
+    padding: $space-xs 0;
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: $space;
+  }
+}

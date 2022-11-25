@@ -1,0 +1,38 @@
+@import 'variables.scss';
+
+.c-sidebar {
+  width: 15%;
+  height: 100vh;
+
+  background: $color-green;
+
+  &__options {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__options-item {
+    padding: $space-s $space;
+    margin: $space-s;
+
+    text-decoration: none;
+    color: $color-black;
+    border-radius: $space-s;
+
+    &--active {
+      background: $color-lightgray;
+      cursor: pointer;
+    }
+
+    &:hover {
+      background: $color-lightgray;
+      cursor: pointer;
+    }
+  }
+
+  &__bottom-line {
+    height: 1px;
+    background-color: $color-black;
+    margin: $space-s;
+  }
+}

@@ -1,0 +1,14 @@
+@import 'variables.scss';
+
+.c-button {
+  padding: $space-xs $space-s;
+  margin: $space-xs;
+
+  width: 10rem;
+
+  background-color: $color-green;
+  font-size: $fs-medium;
+  border-radius: $space-s;
+  border-width: 1px;
+  cursor: pointer;
+}

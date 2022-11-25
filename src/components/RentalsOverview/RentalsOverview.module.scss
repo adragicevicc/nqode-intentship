@@ -1,0 +1,34 @@
+@import 'variables.scss';
+
+.c-rentals-overview {
+  padding: $space-l $space-xl;
+  margin: $space-l;
+
+  width: 90%;
+  background-color: $color-lightgray;
+  border-radius: $space-s;
+
+  &__headers {
+    margin-bottom: $space;
+    font-weight: bold;
+
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    padding: $space-xs 0;
+
+    &-admin-options {
+      grid-template-columns: repeat(7, 1fr);
+    }
+
+    &-simple-view {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &__list-container {
+    display: flex;
+    flex-direction: column;
+    gap: $space;
+  }
+}

@@ -1,0 +1,43 @@
+@import 'variables.scss';
+
+.c-book-list-item {
+  padding: $space-xs $space-s;
+  margin: $space-xs;
+
+  width: 13.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  background-color: $color-lightgray;
+
+  border-radius: $space-s;
+
+  &__image {
+    width: $img-size-xs;
+    height: $img-size-xs;
+  }
+
+  &__info-container {
+    padding: $space-xs $space-s;
+    margin: $space-xs;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__link {
+    margin: $space-s;
+    color: $color-black;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  &:hover {
+    background-color: $color-gray;
+  }
+}

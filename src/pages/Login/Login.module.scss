@@ -1,0 +1,34 @@
+@import 'variables.scss';
+
+.c-login {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(to top, #e4f1e5 0%, #9ec59b 100%);
+
+  &__container {
+    padding: $space-xs $space-s;
+    margin: auto;
+
+    width: $size-base;
+    height: $size-s;
+
+    background: transparent;
+    color: $color-black;
+
+    border: 2px solid $color-green;
+    border-radius: $space-s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  &__button-container {
+    padding: $space-xs $space-s;
+  }
+}

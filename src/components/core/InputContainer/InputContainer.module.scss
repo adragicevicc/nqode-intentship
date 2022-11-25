@@ -1,0 +1,15 @@
+@import 'variables.scss';
+
+.c-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  &__input-label {
+    padding: $space-xs $space-s;
+    margin: $space-s;
+
+    font-size: $fs-base;
+  }
+}

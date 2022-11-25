@@ -1,0 +1,12 @@
+@import 'variables.scss';
+
+.c-profile-info-dialog {
+  &__container {
+    padding: $space-xs $space-s;
+    margin: $space-xs;
+  }
+
+  &__button-container {
+    padding: $space-xs $space-s;
+  }
+}
