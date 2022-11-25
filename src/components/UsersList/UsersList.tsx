@@ -6,6 +6,7 @@ import classes from './UsersList.module.scss';
 import ProfileInfoDialog from 'components/ProfileInfoDialog/ProfileInfoDialog';
 import Button from 'components/core/Button/Button';
 import { isRoleAdmin } from 'services/tokenService';
+import { error } from 'services/toastService';
 
 const UsersList = () => {
   const [users, setUsers] = useState<UserModel[]>([]);
@@ -17,7 +18,9 @@ const UsersList = () => {
   };
 
   const handleCreate = (id: number, user: UserModel) => {
-    createUser(user).then(retriveUsers);
+    createUser(user)
+      .then(retriveUsers)
+      .catch(() => error('User with same username already exists!'));
     setAddUser(false);
   };
 
