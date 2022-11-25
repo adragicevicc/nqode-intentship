@@ -7,6 +7,7 @@ import Button from 'components/core/Button/Button';
 import BookDialog from 'components/BookDialog/BookDialog';
 import { isRoleAdmin } from 'services/tokenService';
 import { createBook, getBooks } from 'services/booksService';
+import { warning } from 'services/toastService';
 
 interface Pagable {
   current?: boolean;
@@ -43,6 +44,8 @@ const BooksList = () => {
       setSearchedBooks(
         books.filter((item) => item.title.toLowerCase().includes(searchInput.toLowerCase()))
       );
+    } else {
+      warning('Input must be at least 3 characters long!');
     }
   };
 
