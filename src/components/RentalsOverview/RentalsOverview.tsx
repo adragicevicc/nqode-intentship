@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import RentalOverviewItem from 'components/RentalsOverviewItem/RentalsOverviewItem';
 import RentalModel from 'models/RentalModel';

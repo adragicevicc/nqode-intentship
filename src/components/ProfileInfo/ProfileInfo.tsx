@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import Button from 'components/core/Button/Button';
 import ProfileInfoDialog from 'components/ProfileInfoDialog/ProfileInfoDialog';
