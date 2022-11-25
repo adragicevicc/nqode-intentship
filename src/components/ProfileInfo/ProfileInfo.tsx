@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Button from 'components/core/Button/Button';
 import ProfileInfoDialog from 'components/ProfileInfoDialog/ProfileInfoDialog';
 import UserModel from 'models/UserModel';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { isRoleAdmin } from 'services/tokenService';
 import { getUserById, deleteUser, updateUser } from 'services/userService';
 import classes from './ProfileInfo.module.scss';
@@ -11,7 +11,6 @@ const ProfileInfo = () => {
   const [user, setUser] = useState<UserModel>({} as UserModel);
   const [modify, setModify] = useState<Boolean>(false);
 
-  const navigate = useNavigate();
   const { id } = useParams();
 
   const retriveUser = async () => {
@@ -19,9 +18,8 @@ const ProfileInfo = () => {
     setUser(data);
   };
 
-  const handleDelete = async () => {
-    await deleteUser(Number(id));
-    navigate('/dashboard/users');
+  const handleDelete = () => {
+    deleteUser(Number(id));
   };
 
   const handleUpdate = (id: number, user: UserModel) => {

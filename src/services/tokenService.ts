@@ -8,7 +8,7 @@ export const getDecodedToken = (): TokenData | null => {
 
 export const getRole = () => {
   const decoded = getDecodedToken();
-  return decoded ? decoded.userRole : '';
+  return decoded ? decoded.userRole : null;
 };
 
 export const isRoleAdmin = () => {

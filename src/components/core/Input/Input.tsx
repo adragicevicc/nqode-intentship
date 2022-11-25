@@ -7,9 +7,10 @@ interface InputProps {
   type?: string;
   name?: string;
   min?: number;
+  placeholder?: string;
 }
 
-const Input = ({ onChange, value, type, name, min }: InputProps) => {
+const Input = ({ onChange, value, type, name, min, placeholder }: InputProps) => {
   return (
     <div className={classes['c-input']}>
       <input
@@ -19,6 +20,7 @@ const Input = ({ onChange, value, type, name, min }: InputProps) => {
         type={type}
         name={name}
         min={min}
+        placeholder={placeholder}
       />
     </div>
   );

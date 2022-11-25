@@ -5,7 +5,9 @@ import Button from 'components/core/Button/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import InputContainer from 'components/core/InputContainer/InputContainer';
-import { isRoleUser } from 'services/tokenService';
+import { isRoleAdmin } from 'services/tokenService';
+import { error } from 'services/toastService';
+import { ToastContainer } from 'react-toastify';
 
 interface CredentialsForm {
   username: string;
@@ -23,11 +25,7 @@ const Login = () => {
   const handleToken = (token: string) => {
     localStorage.setItem('token', token);
 
-    if (isRoleUser()) {
-      navigate('/user/booksoverview');
-      return;
-    }
-    navigate('/dashboard/rentalsoverview');
+    navigate(isRoleAdmin() ? '/dashboard/rentalsoverview' : '/user/booksoverview');
   };
 
   const handleLogin = async () => {
@@ -38,7 +36,8 @@ const Login = () => {
       })
       .then((response) => {
         handleToken(response.data.accessToken);
-      });
+      })
+      .catch(() => error('Check your credentials!'));
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,6 +60,7 @@ const Login = () => {
           <Button content="Log in" onClick={handleLogin} />
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

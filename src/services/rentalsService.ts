@@ -40,6 +40,5 @@ export const updateExtendRental = async (id: number, additionalRentPeriod: numbe
 };
 
 export const updateCloseRental = async (id: number) => {
-  const response = await axios.put(`rent/close/${id}`);
-  return response.data;
+  return await axios.put(`rent/close/${id}`);
 };

@@ -8,3 +8,7 @@ export const success = (message: string) => {
 export const error = (message: string) => {
   toast.error(message, { position: toast.POSITION.TOP_RIGHT });
 };
+
+export const warning = (message: string) => {
+  toast.warning(message, { position: toast.POSITION.TOP_RIGHT });
+};

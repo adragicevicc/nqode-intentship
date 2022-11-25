@@ -47,8 +47,8 @@ const Book = () => {
     setRentPeriod(parseInt(event.target.value));
   };
 
-  const rentBook = async () => {
-    await createRental(Number(id), rentPeriod);
+  const rentBook = () => {
+    createRental(Number(id), rentPeriod);
   };
 
   const addBookCopy = () => {
@@ -96,7 +96,7 @@ const Book = () => {
                   type="number"
                   min={1}
                 />
-                <Button content="Rent" onClick={rentBook} />
+                <Button content="Rent" onClick={rentBook} disabled={!rentPeriod} />
               </div>
             )}
           </div>
