@@ -1,4 +1,5 @@
 import axios from 'customAxios/customAxios';
+import { error, success } from './toastService';
 
 interface RentalsParams {
   current: Boolean;
@@ -22,18 +23,20 @@ export const getRentalsByUser = async (id: number, params: RentalsParams) => {
 };
 
 export const createRental = async (id: number, rentPeriod: number) => {
-  return await axios.post(`/rent/book/${id}/user`);
+  return await axios
+    .post(`/rent/book/${id}/user`, {}, { params: { rentPeriod: rentPeriod } })
+    .then(() => success('Book successfully rented!'))
+    .catch(() => error('Book can not be rented'));
 };
 
 export const updateExtendRental = async (id: number, additionalRentPeriod: number) => {
-  const response = await axios.put(
+  return await axios.put(
     `rent/${id}`,
     {},
     {
       params: { additionalRentPeriod: additionalRentPeriod }
     }
   );
-  return response.data;
 };
 
 export const updateCloseRental = async (id: number) => {

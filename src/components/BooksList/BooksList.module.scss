@@ -4,7 +4,25 @@
   padding: $space-xs $space-s;
   margin: $space-l;
 
-  &__items {
+  display: flex;
+  flex-direction: column;
+
+  &__dialog-container {
+    padding: $space-xs $space-s;
+    margin-bottom: $space-s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__button-container {
+    display: flex;
+    justify-content: end;
+  }
+
+  &__items-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -18,11 +36,5 @@
     flex-direction: row;
     justify-content: center;
     align-items: flex-end;
-  }
-
-  &__button-container {
-    display: flex;
-
-    height: fit-content;
   }
 }

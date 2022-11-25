@@ -6,9 +6,10 @@ interface InputProps {
   value?: string | number;
   type?: string;
   name?: string;
+  min?: number;
 }
 
-const Input = ({ onChange, value, type, name }: InputProps) => {
+const Input = ({ onChange, value, type, name, min }: InputProps) => {
   return (
     <div className={classes['c-input']}>
       <input
@@ -17,6 +18,7 @@ const Input = ({ onChange, value, type, name }: InputProps) => {
         value={value}
         type={type}
         name={name}
+        min={min}
       />
     </div>
   );

@@ -4,11 +4,13 @@ import image from 'img/book1.png';
 import Button from 'components/core/Button/Button';
 import { useNavigate, useParams } from 'react-router-dom';
 import BookModel from 'models/BookModel';
-import axios from 'axios';
 import BookDialog from 'components/BookDialog/BookDialog';
 import { isRoleAdmin } from 'services/tokenService';
 import { createRental } from 'services/rentalsService';
 import InputContainer from 'components/core/InputContainer/InputContainer';
+import { getBookById, deleteBook, updateBook } from 'services/booksService';
+import { createBookCopy } from 'services/bookCopyService';
+import { error, success } from 'services/toastService';
 
 const Book = () => {
   const [book, setBook] = useState<BookModel>({} as BookModel);
@@ -18,23 +20,27 @@ const Book = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const retriveBook = async () => {
-    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/book/${id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
-    });
-    setBook(response.data);
+  const bookCopy = {
+    id: 0,
+    identifier: crypto.randomUUID(),
+    bookId: book.id
   };
 
-  const deleteBook = async () => {
-    await axios
-      .delete(`${process.env.REACT_APP_BASE_URL}/book/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        }
-      })
-      .then(() => navigate('dashboard/booksoverview'));
+  const retriveBook = async () => {
+    const data = await getBookById(Number(id));
+    setBook(data);
+  };
+
+  const handleDelete = async () => {
+    await deleteBook(Number(id))
+      .then(() => success('Book deleted!'))
+      .catch(() => error('Book has copies and can not be deleted!'))
+      .then(() => navigate('/dashboard/booksoverview'));
+  };
+
+  const handleUpdate = (id: number, book: BookModel) => {
+    updateBook(id, book).then(retriveBook);
+    setModify(false);
   };
 
   const handleRentPeriod = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,6 +49,10 @@ const Book = () => {
 
   const rentBook = async () => {
     await createRental(Number(id), rentPeriod);
+  };
+
+  const addBookCopy = () => {
+    createBookCopy(bookCopy).then(retriveBook);
   };
 
   useEffect(() => {
@@ -56,14 +66,7 @@ const Book = () => {
       </div>
       {modify ? (
         <div className={classes['c-book__modify-container']}>
-          <BookDialog
-            id={book.id}
-            title={book.title}
-            author={book.author}
-            description={book.description}
-            imagePath={book.imagePath}
-            numOfCopies={book.numOfCopies}
-          />
+          <BookDialog oldBook={book} componentType={'modify'} handleSubmit={handleUpdate} />
           <Button content="Cancel" onClick={() => setModify(false)} />
         </div>
       ) : (
@@ -82,11 +85,17 @@ const Book = () => {
             {isRoleAdmin() ? (
               <>
                 <Button content="Edit" onClick={() => setModify(true)} />
-                <Button content="Delete" onClick={deleteBook} />
+                <Button content="Delete" onClick={handleDelete} />
+                <Button content="Add book copy" onClick={addBookCopy} />
               </>
             ) : (
               <div>
-                <InputContainer onChange={handleRentPeriod} label="Rent peroid (days): " />
+                <InputContainer
+                  onChange={handleRentPeriod}
+                  label="Rent peroid (days): "
+                  type="number"
+                  min={1}
+                />
                 <Button content="Rent" onClick={rentBook} />
               </div>
             )}

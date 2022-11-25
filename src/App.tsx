@@ -9,6 +9,7 @@ import DashboardLayout from 'layouts/DashboardLayout/DashboardLayout';
 import Book from 'pages/Book/Book';
 import BooksOverview from 'pages/BooksOverview/BooksOverview';
 import UserLayout from 'layouts/UserLayout/UserLayout';
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="profile/:id" element={<Profile />} />
         </Route>
       </Routes>
+      <ToastContainer />
     </div>
   );
 };

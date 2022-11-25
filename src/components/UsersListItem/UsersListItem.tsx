@@ -1,5 +1,5 @@
-import UserModel from 'models/UserModel';
 import React from 'react';
+import UserModel from 'models/UserModel';
 import { Link } from 'react-router-dom';
 import classes from './UsersListItem.module.scss';
 

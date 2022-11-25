@@ -4,7 +4,7 @@ import ProfileInfoDialog from 'components/ProfileInfoDialog/ProfileInfoDialog';
 import UserModel from 'models/UserModel';
 import { useNavigate, useParams } from 'react-router-dom';
 import { isRoleAdmin } from 'services/tokenService';
-import { getUserById, deleteUser } from 'services/userService';
+import { getUserById, deleteUser, updateUser } from 'services/userService';
 import classes from './ProfileInfo.module.scss';
 
 const ProfileInfo = () => {
@@ -24,13 +24,23 @@ const ProfileInfo = () => {
     navigate('/dashboard/users');
   };
 
+  const handleUpdate = (id: number, user: UserModel) => {
+    updateUser(id, user).then(retriveUser);
+    setModify(false);
+  };
+
   useEffect(() => {
     retriveUser();
   }, []);
 
   return (
     <div className={classes['c-profile-info']}>
-      {!modify ? (
+      {modify ? (
+        <div className={classes['c-profile-info__modify-container']}>
+          <ProfileInfoDialog oldUser={user} componentType={'modify'} handleSubmit={handleUpdate} />
+          <Button content="Cancel" onClick={() => setModify(false)} />
+        </div>
+      ) : (
         <div>
           <div
             className={`${classes['c-profile-info__info-container']} ${classes['c-profile-info__info-container--heading']}`}
@@ -53,18 +63,6 @@ const ProfileInfo = () => {
               </>
             )}
           </div>
-        </div>
-      ) : (
-        <div className={classes['c-profile-info__modify-container']}>
-          <ProfileInfoDialog
-            id={user.id}
-            email={user.email}
-            firstName={user.firstName}
-            lastName={user.lastName}
-            address={user.address}
-            phoneNumber={user.phoneNumber}
-          />
-          <Button content="Cancel" onClick={() => setModify(false)} />
         </div>
       )}
     </div>

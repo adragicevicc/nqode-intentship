@@ -55,13 +55,13 @@ const RentalsOverview = ({ componentType }: RentalsOverviewProps) => {
         {isRoleAdmin() && (
           <>
             <span>User email</span>
-            <span>Extend rent period for (days):</span>
+            {componentType === 'current' && <span>Extend rent period for (days):</span>}
           </>
         )}
       </div>
       <div className={classes['c-rentals-overview__list-container']}>
         {rentals.map((item) => (
-          <RentalOverviewItem item={item} key={item.id} />
+          <RentalOverviewItem item={item} key={item.id} componentType={componentType} />
         ))}
       </div>
     </div>
