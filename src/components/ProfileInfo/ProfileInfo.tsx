@@ -4,7 +4,7 @@ import ProfileInfoDialog from 'components/ProfileInfoDialog/ProfileInfoDialog';
 import UserModel from 'models/UserModel';
 import { useNavigate, useParams } from 'react-router-dom';
 import { isRoleAdmin } from 'services/tokenService';
-import { getUserById, deleteUser } from 'services/userService';
+import { getUserById, deleteUser, updateUser } from 'services/userService';
 import classes from './ProfileInfo.module.scss';
 
 const ProfileInfo = () => {
@@ -24,6 +24,11 @@ const ProfileInfo = () => {
     navigate('/dashboard/users');
   };
 
+  const handleUpdate = (id: number, user: UserModel) => {
+    updateUser(id, user).then(retriveUser);
+    setModify(false);
+  };
+
   useEffect(() => {
     retriveUser();
   }, []);
@@ -32,7 +37,7 @@ const ProfileInfo = () => {
     <div className={classes['c-profile-info']}>
       {modify ? (
         <div className={classes['c-profile-info__modify-container']}>
-          <ProfileInfoDialog oldUser={user} componentType={'modify'} />
+          <ProfileInfoDialog oldUser={user} componentType={'modify'} handleSubmit={handleUpdate} />
           <Button content="Cancel" onClick={() => setModify(false)} />
         </div>
       ) : (

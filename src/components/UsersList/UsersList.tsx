@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import UsersListItem from 'components/UsersListItem/UsersListItem';
 import UserModel from 'models/UserModel';
-import { getUsers } from 'services/userService';
+import { createUser, getUsers } from 'services/userService';
 import classes from './UsersList.module.scss';
 import ProfileInfoDialog from 'components/ProfileInfoDialog/ProfileInfoDialog';
 import Button from 'components/core/Button/Button';
@@ -14,6 +14,11 @@ const UsersList = () => {
   const retriveUsers = async () => {
     const data = await getUsers();
     setUsers(data);
+  };
+
+  const handleCreate = (id: number, user: UserModel) => {
+    createUser(user).then(retriveUsers);
+    setAddUser(false);
   };
 
   const renderAdminOptions = () => {
@@ -31,6 +36,7 @@ const UsersList = () => {
                 address: '',
                 phoneNumber: ''
               }}
+              handleSubmit={handleCreate}
             />
             <Button content={'Cancel'} onClick={() => setAddUser(false)} />
           </div>

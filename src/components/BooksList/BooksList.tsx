@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import BookListItem from 'components/BookListItem/BookListItem';
 import classes from './BooksList.module.scss';
-import axios from 'axios';
 import BookModel from 'models/BookModel';
 import InputContainer from 'components/core/InputContainer/InputContainer';
 import Button from 'components/core/Button/Button';
 import BookDialog from 'components/BookDialog/BookDialog';
 import { isRoleAdmin } from 'services/tokenService';
+import { createBook, getBooks } from 'services/booksService';
 
 interface Pagable {
   current?: boolean;
@@ -22,22 +22,16 @@ const BooksList = () => {
   const [addBook, setAddBook] = useState<boolean>(false);
 
   const retriveBooks = async () => {
-    let url = `${process.env.REACT_APP_BASE_URL}/book`;
     const params: Pagable = {
       page: 0,
       size: 8,
       sort: 'asc'
     };
 
-    const response = await axios.get(url, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      },
-      params
-    });
+    const data = await getBooks(params);
 
-    setBooks(response.data.content);
-    setSearchedBooks(response.data.content);
+    setBooks(data);
+    setSearchedBooks(data);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,6 +42,13 @@ const BooksList = () => {
     setSearchedBooks(
       books.filter((item) => item.title.toLowerCase().includes(searchInput.toLowerCase()))
     );
+  };
+
+  const handleCreate = (id: number, book: BookModel) => {
+    createBook(book)
+      .catch(retriveBooks)
+      .then(() => success('Book successfully created'));
+    setAddBook(false);
   };
 
   const renderAdminOptions = () => {
@@ -65,6 +66,7 @@ const BooksList = () => {
                 imagePath: 'file/somewhere',
                 numOfCopies: 0
               }}
+              handleSubmit={handleCreate}
             />
             <Button content={'Cancel'} onClick={() => setAddBook(false)} />
           </div>
@@ -100,3 +102,6 @@ const BooksList = () => {
 };
 
 export default BooksList;
+function success(arg0: string): any {
+  throw new Error('Function not implemented.');
+}

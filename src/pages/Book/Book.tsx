@@ -8,8 +8,9 @@ import BookDialog from 'components/BookDialog/BookDialog';
 import { isRoleAdmin } from 'services/tokenService';
 import { createRental } from 'services/rentalsService';
 import InputContainer from 'components/core/InputContainer/InputContainer';
-import { getBookById, deleteBook } from 'services/booksService';
+import { getBookById, deleteBook, updateBook } from 'services/booksService';
 import { createBookCopy } from 'services/bookCopyService';
+import { error, success } from 'services/toastService';
 
 const Book = () => {
   const [book, setBook] = useState<BookModel>({} as BookModel);
@@ -31,8 +32,15 @@ const Book = () => {
   };
 
   const handleDelete = async () => {
-    await deleteBook(Number(id));
-    navigate('/booksoverview');
+    await deleteBook(Number(id))
+      .then(() => success('Book deleted!'))
+      .catch(() => error('Book has copies and can not be deleted!'))
+      .then(() => navigate('/dashboard/booksoverview'));
+  };
+
+  const handleUpdate = (id: number, book: BookModel) => {
+    updateBook(id, book).then(retriveBook);
+    setModify(false);
   };
 
   const handleRentPeriod = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,7 +66,7 @@ const Book = () => {
       </div>
       {modify ? (
         <div className={classes['c-book__modify-container']}>
-          <BookDialog oldBook={book} componentType={'modify'} />
+          <BookDialog oldBook={book} componentType={'modify'} handleSubmit={handleUpdate} />
           <Button content="Cancel" onClick={() => setModify(false)} />
         </div>
       ) : (
@@ -82,7 +90,12 @@ const Book = () => {
               </>
             ) : (
               <div>
-                <InputContainer onChange={handleRentPeriod} label="Rent peroid (days): " />
+                <InputContainer
+                  onChange={handleRentPeriod}
+                  label="Rent peroid (days): "
+                  type="number"
+                  min={1}
+                />
                 <Button content="Rent" onClick={rentBook} />
               </div>
             )}

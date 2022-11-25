@@ -3,32 +3,18 @@ import Button from 'components/core/Button/Button';
 import InputContainer from 'components/core/InputContainer/InputContainer';
 import BookModel from 'models/BookModel';
 import classes from './BookDialog.module.scss';
-import { createBook, updateBook } from 'services/booksService';
-import { useNavigate, useParams } from 'react-router-dom';
 
 interface BookDialogProps {
   oldBook: BookModel;
   componentType: 'new' | 'modify';
+  handleSubmit: (id: number, book: BookModel) => void;
 }
 
-const BookDialog = ({ oldBook, componentType }: BookDialogProps) => {
+const BookDialog = ({ oldBook, componentType, handleSubmit }: BookDialogProps) => {
   const [book, setBook] = useState<BookModel>(oldBook);
-
-  const navigate = useNavigate();
-  const { id } = useParams();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBook((prev) => ({ ...prev, [event.target.name]: event.target.value }));
-  };
-
-  const handleCreate = () => {
-    createBook(book);
-  };
-
-  const handleUpdate = async () => {
-    const data = await updateBook(Number(id), book);
-    setBook(data);
-    navigate('/booksoverview');
   };
 
   return (
@@ -44,10 +30,7 @@ const BookDialog = ({ oldBook, componentType }: BookDialogProps) => {
         />
       </div>
       <div className={classes['c-book-dialog__button-container']}>
-        <Button
-          content={'Submit'}
-          onClick={componentType === 'new' ? handleCreate : handleUpdate}
-        />
+        <Button content={'Submit'} onClick={() => handleSubmit(oldBook.id, book)} />
       </div>
     </div>
   );

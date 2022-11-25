@@ -2,7 +2,6 @@ import axios from 'customAxios/customAxios';
 import BookModel from 'models/BookModel';
 
 interface BookParams {
-  current: Boolean;
   page: number;
   size: number;
   sort: string;
